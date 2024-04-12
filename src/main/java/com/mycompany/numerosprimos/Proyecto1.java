@@ -155,7 +155,7 @@ public class Proyecto1 {
         scanner.close();
 
         // Punto 3. Generadores
-        ArrayList<Integer> generadores = generadores(17);
+        ArrayList<Integer> generadores = generadores(n);
         System.out.println("\n\nGeneradores del grupo cíclico multiplicativo Z*n, con n = " + n + ": ");
         for (int i = 0; i < generadores.size(); i++) {
             System.out.println("Generador " + (i + 1) + ": " + generadores.get(i));
