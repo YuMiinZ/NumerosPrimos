@@ -110,7 +110,7 @@ public class Proyecto1 {
     }
     
 
-    public static int[] generadores(int primo) {
+    public static ArrayList<Integer> generadores(int primo) {
         ArrayList<Integer> generadores = new ArrayList<>();
         for (int g = 2; g < primo; g++) {
             if (esRaizPrimitiva(g, primo)) {
@@ -120,7 +120,7 @@ public class Proyecto1 {
                 }
             }
         }
-        return generadores.stream().mapToInt(Integer::intValue).toArray();
+        return generadores;
     }
 
     public static boolean esRaizPrimitiva(int g, int n) {
@@ -188,10 +188,10 @@ public class Proyecto1 {
         scanner.close();*/
 
         // Punto 3. Generadores
-        int[] generadores = generadores(17);
+        ArrayList<Integer> generadores = generadores(17);
         System.out.println("\n\nGeneradores del grupo cíclico multiplicativo Z*n, con n = " + n + ": ");
-        for (int i = 0; i < generadores.length; i++) {
-            System.out.println("Generador " + (i + 1) + ": " + generadores[i]);
+        for (int i = 0; i < generadores.size(); i++) {
+            System.out.println("Generador " + (i + 1) + ": " + generadores.get(i));
         }
     }
 }
