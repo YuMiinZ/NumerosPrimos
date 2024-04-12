@@ -109,35 +109,24 @@ public class Proyecto1 {
         }
     }
 
-    public static int[] generadores(int primo) {
-        // al menos 3 generados del grupo ciclico multiplicativo Z*n
-        int[] generadores = new int[3];
-        int count = 0;
-        //int parts = primo / 100;
+    public static ArrayList<Integer> generadores(int primo) {
+        ArrayList<Integer> generadores = new ArrayList<>();
         for (int g = 2; g < primo; g++) {
-           /*  if (g % parts == 0) {
-                System.out.println("va por el  " + (g * 100) / primo + "% de la ejecución");
-            } */
             if (esRaizPrimitiva(g, primo)) {
-                generadores[count++] = g;
-                if (count == 3) {
-                    return generadores;
+                generadores.add(g);
+                if (generadores.size() == 3) {
+                    break;
                 }
-
             }
         }
         return generadores;
     }
 
     public static boolean esRaizPrimitiva(int g, int n) {
-        ArrayList<Integer> potencias = new ArrayList<>();
-        for (int i = 1; i < n; i++) {
-            int potencia = (int) Math.pow(g, i) % n; // Calcula g^i módulo n
-            //System.out.println(potencia);
-            if (potencias.contains(potencia) || potencia == 1) {
+        for (int i = 1; i < n - 1; i++) {
+            if (expModular(g, i, n) == 1) { // Calcula g^i módulo n
                 return false;
             }
-            potencias.add(potencia);
         }
         return true;
     }
@@ -150,6 +139,7 @@ public class Proyecto1 {
 
         // Punto 2. Encontrar inversos con n primo usando el algoritmo de euclides
         // extendido
+
         Scanner scanner = new Scanner(System.in);
         System.out.println(
                 "\nIngrese el tamaño de la lista de enteros que desea ingresar para encontrar el inverso multiplicativo: ");
@@ -165,10 +155,10 @@ public class Proyecto1 {
         scanner.close();
 
         // Punto 3. Generadores
-        int[] generadores = generadores(n);
-        System.out.println("\n\nGeneradores del grupo cíclico multiplicativo Z*n" + n + ": ");
-        for (int i = 0; i < generadores.length; i++) {
-            System.out.println("Generador " + (i + 1) + ": " + generadores[i]);
+        ArrayList<Integer> generadores = generadores(n);
+        System.out.println("\n\nGeneradores del grupo cíclico multiplicativo Z*n, con n = " + n + ": ");
+        for (int i = 0; i < generadores.size(); i++) {
+            System.out.println("Generador " + (i + 1) + ": " + generadores.get(i));
         }
     }
 }
